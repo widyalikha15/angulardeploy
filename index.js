@@ -8,7 +8,7 @@ function requireHTTPS(req, res, next) {
 const express = require('express');
 const app = express();
 
-//app.use(requireHTTPS); 
+app.use(requireHTTPS); //juka di deploy di heroku di uncomment
 app.use(express.static('./dist/testdeploy'));//line 20 angular.json
 
 app.get('/*', (req, res) =>
