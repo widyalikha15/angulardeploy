@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="login-wrap py-5">
+        <form [formGroup]="form.inputData" (ngSubmit)="signIn()" class="form-signin" >
+          <h1 class="h3 mb-3 font-weight-normal-center">Please sign in</h1>
+          <label for="inputEmail" class="sr-only">Email address</label>
+          <input class="form-control" placeholder="Email address" type="text" formControlName="email" required name="email" id="email">
+            <span
+              style="color: red"
+              *ngIf="email && email.touched && email.invalid">
+              You must input a valid email.
+            </span>
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input class="form-control" placeholder="Password" type="password" formControlName="password" required name="password" id="password">
+            <span
+              style="color: red"
+              *ngIf="password && password.touched && password.invalid">
+              Your password must have a length of 5 characters.
+            </span>
+          <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          Belum punya akun?  <app-link linkName="sign up" [linkTo]="['', 'signup']"></app-link>!
+          <p class="mt-2 mb-3 text-muted">© 2021</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

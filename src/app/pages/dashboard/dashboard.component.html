@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <button (click)="open(content)" type="submit" class="btn btn-outline-success">
+                <i class="bi bi-person-plus-fill" viewBox="0 0 16 16" width="16" height="16"></i>
+                Tambah Payment
+              </button>
+            </div>
+        </div>
+    <!-- modal Add -->
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Tambah Payment</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form.inputData" (ngSubmit)="addPayment()" action="">
+          <div class="row">
+            <div class="form-group">
+              <label for="cardOwnerName">Card Owner Name</label>
+              <input value="Card Owner Name" placeholder="Full Name"
+                [class.invalid]="cardOwnerName && cardOwnerName.touched && cardOwnerName.invalid" type="text"
+                formControlName="cardOwnerName" id="cardOwnerName" class="form-control form-control">
+              <span style="color: red" *ngIf="cardOwnerName && cardOwnerName.touched && cardOwnerName.invalid">
+                Tolong Masukkan Card Owner Name.
+              </span>
+            </div>
+            <div class="form-group">
+              <label for="cardNumber">Card Number</label>
+              <input value="Card Number" placeholder="16 Digit Card Number" [class.invalid]="cardNumber && cardNumber.touched && cardNumber.invalid" type="text"
+                formControlName="cardNumber" id="cardNumber" class="form-control form-control">
+              <span style="color: red" *ngIf="cardNumber && cardNumber.touched && cardNumber.invalid">
+                Tolong Masukkan Card Number.
+              </span>
+            </div>
+            <div class="form-group">
+                <label for="expirationDate">last N expiration Date</label>
+                <input placeholder="MM/YYYY" value="Expiration Date" [class.invalid]="expirationDate && expirationDate.touched && expirationDate.invalid" type="text"
+                  formControlName="expirationDate" id="expirationDate" class="form-control form-control">
+                <span style="color: red" *ngIf="expirationDate && expirationDate.touched && expirationDate.invalid">
+                  Tolong Masukkan last Nexpiration Date.
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="securityCode">Security Code</label>
+                <input value="Security Code" placeholder="Security Code" [class.invalid]="securityCode && securityCode.touched && securityCode.invalid" type="text"
+                  formControlName="securityCode" id="securityCode" class="form-control form-control">
+                <span style="color: red" *ngIf="securityCode && securityCode.touched && securityCode.invalid">
+                  Tolong Masukkan security Code.
+                </span>
+            </div>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <input type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')" value="Cancel">
+            <button type="submit" class="btn btn-outline-success " (click)="modal.close('Save click')"
+              [disabled]="form.inputData.invalid">Tambah</button>
+          </div>
+        </form>
+      </div>
+    </ng-template> 
+    </nav>
+  </div>

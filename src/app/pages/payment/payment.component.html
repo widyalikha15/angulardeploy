@@ -1,0 +1,98 @@
+<!-- Tabel Payment -->
+<app-dashboard (newTaskEvent) = "refreshList()"></app-dashboard>
+
+<div class="container-fluid">    
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">cardOwnerName</th>
+                <th scope="col">cardNumber</th>
+                <th scope="col">expirationDate</th>
+                <th scope="col">securityCode</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let payment of payments">
+                <td>{{payment.id}}</td>
+                <td>{{payment.cardOwnerName}}</td>
+                <td>{{payment.cardNumber}}</td>
+                <td>{{payment.expirationDate}}</td>
+                <td>{{payment.securityCode}}</td>
+                <td>
+                    <button (click)= "open(update, payment)" class="btn btn-outline-warning me-2"> Edit </button>
+                    <button (click) = "open(delete, payment)" class="btn btn-outline-danger"> Hapus </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- modal update -->
+
+<ng-template #update let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Update Payment</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="form.updateData" (ngSubmit)="updatePayment()" action="">
+            <div class="row">
+                <div class="form-group">
+                    <label for="cardOwnerName">card Owner Name</label>
+                    <input value="{{currentPayment.cardOwnerName}}" [class.invalid]="cardOwnerName && cardOwnerName.touched && cardOwnerName.invalid" type="text" formControlName="cardOwnerName" id="cardOwnerName" class="form-control form-control">
+                    <span style="color: red" *ngIf="cardOwnerName && cardOwnerName.touched && cardOwnerName.invalid">
+                        Tolong Masukkan card Owner Name.
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="cardNumber">card Number</label>
+                    <input [class.invalid]="cardNumber && cardNumber.touched && cardNumber.invalid" type="text" formControlName="cardNumber" id="cardNumber" class="form-control form-control">
+                    <span style="color: red" *ngIf="cardNumber && cardNumber.touched && cardNumber.invalid">
+                        Tolong Masukkan card Number.
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="expirationDate">last expiration Date</label>
+                    <input [class.invalid]="expirationDate && expirationDate.touched && expirationDate.invalid" type="text" formControlName="expirationDate" id="expirationDate" class="form-control form-control">
+                    <span style="color: red" *ngIf="expirationDate && expirationDate.touched && expirationDate.invalid">
+                        Tolong Masukkan last Nexpiration Date.
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="securityCode">security Code</label>
+                    <input [class.invalid]="securityCode && securityCode.touched && securityCode.invalid" type="text" formControlName="securityCode" id="securityCode" class="form-control form-control">
+                    <span style="color: red" *ngIf="securityCode && securityCode.touched && securityCode.invalid">
+                        Tolong Masukkan security Code.
+                    </span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')" value="Cancel">
+                <!-- <button type="submit" class="btn btn-outline-primary" (click)="modal.close('Save click')" [disabled]="form.updateData.invalid">Update Payment</button> -->
+                <button type="submit" class="btn btn-outline-primary" (click)="modal.close('Save click')" [disabled]="form.updateData.invalid">Update Payment</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+
+
+
+<!-- Modal Delete -->
+<ng-template #delete let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Delete Payment</h4>
+    </div>
+    <form>
+        <div class="modal-body">
+            <p>Apakah Kamu Yakin Ingin Menghapus '{{currentPayment.cardOwnerName}}' ?</p>
+            <p class="text-danger"><small>Data Akan terhapus</small></p>
+        </div>
+        <div class="modal-footer">
+            <input type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')" value="Cancel">
+            <!-- <input type="submit" class="btn btn-outline-danger" (click)="deletePayment()" (click)="modal.close('Save click')" value="Delete"> -->
+            <input type="button" class="btn btn-danger" (click)="deletePayment(currentPayment.id)" (click)="modal.close('Save click')" value="Delete">
+        </div>
+    </form>
+</ng-template> 

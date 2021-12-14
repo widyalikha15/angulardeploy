@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="login-wrap py-5">
+        <form [formGroup]="form.inputData" (ngSubmit)="register()" class="form-signin" >
+          <h1 class="h3 mb-3 font-weight-normal-center">Please sign up</h1>
+          <label for="inputUsername" class="sr-only">Username</label>
+          <input class="form-control" placeholder="Username" type="text" formControlName="username" required name="username" id="username">
+            <span
+              style="color: red"
+              *ngIf="username && username.touched && username.invalid">
+              You must input your username minimum of 5 characters.
+            </span>
+          <label for="inputEmail" class="sr-only">Password</label>
+          <input class="form-control" placeholder="Email" type="text" formControlName="email" required name="email" id="email">
+            <span
+              style="color: red"
+              *ngIf="email && email.touched && email.invalid">
+              You must input a valid email.
+            </span>
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input class="form-control" placeholder="Password" type="password" formControlName="password" required name="password" id="password">
+            <span
+              style="color: red"
+              *ngIf="password && password.touched && password.invalid">
+              Your password must have a length of 5 characters.
+            </span>
+          <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          Sudah punya akun? <app-link linkName="sign in" [linkTo]="['', 'signin']"></app-link>!
+          <p class="mt-2 mb-3 text-muted">© 2021</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
